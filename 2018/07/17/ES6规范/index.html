@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="bob个人博客" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="++ES6篇++一、类型规范  对于常量或不修改的变量声明使用const，对于只在当前作用域下有效的变量，应使用let，全局变量使用var。将所有 const 变量放在一起，然后将所有 let 变量放在一起 1234567const foo = 1;let foo1 = 2;let bar = foo;bar = 9;foo1 = 3;console.log(foo, bar); // =&amp;gt;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ES6规范">
+<meta property="og:url" content="https://bobliyz.github.io/2018/07/17/ES6规范/index.html">
+<meta property="og:site_name" content="bob个人博客">
+<meta property="og:description" content="++ES6篇++一、类型规范  对于常量或不修改的变量声明使用const，对于只在当前作用域下有效的变量，应使用let，全局变量使用var。将所有 const 变量放在一起，然后将所有 let 变量放在一起 1234567const foo = 1;let foo1 = 2;let bar = foo;bar = 9;foo1 = 3;console.log(foo, bar); // =&amp;gt;">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-07-17T08:20:35.688Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ES6规范">
+<meta name="twitter:description" content="++ES6篇++一、类型规范  对于常量或不修改的变量声明使用const，对于只在当前作用域下有效的变量，应使用let，全局变量使用var。将所有 const 变量放在一起，然后将所有 let 变量放在一起 1234567const foo = 1;let foo1 = 2;let bar = foo;bar = 9;foo1 = 3;console.log(foo, bar); // =&amp;gt;">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://bobliyz.github.io/2018/07/17/ES6规范/"/>
+
+
+
+
+
+  <title>ES6规范 | bob个人博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">bob个人博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-rss">
+          <a href="/atom.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-rss"></i> <br />
+            
+            rss
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://bobliyz.github.io/2018/07/17/ES6规范/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="bob">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="bob个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">ES6规范</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-17T16:20:15+08:00">
+                2018-07-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="ES6篇"><a href="#ES6篇" class="headerlink" title="++ES6篇++"></a>++<strong>ES6篇</strong>++</h2><p><strong>一、类型规范</strong></p>
+<hr>
+<p>对于常量或不修改的变量声明使用const，对于只在当前作用域下有效的变量，应使用let，全局变量使用var。将所有 const 变量放在一起，然后将所有 let 变量放在一起</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">const foo = 1;</span><br><span class="line">let foo1 = 2;</span><br><span class="line">let bar = foo;</span><br><span class="line">bar = 9;</span><br><span class="line">foo1 = 3;</span><br><span class="line">console.log(foo, bar); // =&gt; 1, 9</span><br><span class="line">console.log(foo, bar, str); // =&gt; 1, 9,&apos;ouven&apos;</span><br></pre></td></tr></table></figure>
+<p>const和let使用时注意，let 和 const 都是块作用域的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// const and let only exist in the blocks they are defined in.</span><br><span class="line">&#123;</span><br><span class="line">  let a = 1;</span><br><span class="line">  const b = 1;</span><br><span class="line">&#125;</span><br><span class="line">console.log(a); // ReferenceError</span><br><span class="line">console.log(b); // ReferenceError</span><br></pre></td></tr></table></figure>
+<p><strong>二、字符串</strong></p>
+<hr>
+<p>使用单引号 ‘</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// bad</span><br><span class="line">var name = &quot;Bob Parr&quot;;</span><br><span class="line">// good</span><br><span class="line">var name = &apos;Bob Parr&apos;;</span><br><span class="line">// bad</span><br><span class="line">var fullName = &quot;Bob &quot; + this.lastName;</span><br><span class="line">// good</span><br><span class="line">var fullName = &apos;Bob &apos; + this.lastName;</span><br></pre></td></tr></table></figure>
+<p>超过80个字符的字符串应该使用字符串连接换行 注：如果过度使用长字符串连接可能会对性能有影响。jsPerf &amp; Discussion</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">// bad</span><br><span class="line">var errorMessage = &apos;This is a super long error that was thrown because of Batman. When you stop to think about how Batman had anything to do with this, you would get nowhere fast.&apos;;</span><br><span class="line">// bad</span><br><span class="line">var errorMessage = &apos;This is a super long error that \</span><br><span class="line">was thrown because of Batman. \</span><br><span class="line">When you stop to think about \</span><br><span class="line">how Batman had anything to do \</span><br><span class="line">with this, you would get nowhere \</span><br><span class="line">fast.&apos;;</span><br><span class="line">// good</span><br><span class="line">var errorMessage = &apos;This is a super long error that &apos; +</span><br><span class="line">  &apos;was thrown because of Batman.&apos; +</span><br><span class="line">  &apos;When you stop to think about &apos; +</span><br><span class="line">  &apos;how Batman had anything to do &apos; +</span><br><span class="line">  &apos;with this, you would get nowhere &apos; +</span><br><span class="line">  &apos;fast.&apos;;</span><br></pre></td></tr></table></figure>
+<p>编程构建字符串时，使用字符串模板而不是字符串连接</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// bad</span><br><span class="line">function sayHi(name) &#123;</span><br><span class="line">  return &apos;How are you, &apos; + name + &apos;?&apos;;</span><br><span class="line">&#125;</span><br><span class="line">// bad</span><br><span class="line">function sayHi(name) &#123;</span><br><span class="line">  return [&apos;How are you, &apos;, name, &apos;?&apos;].join();</span><br><span class="line">&#125;</span><br><span class="line">// good</span><br><span class="line">function sayHi(name) &#123;</span><br><span class="line">  return `How are you, $&#123;name&#125;?`;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>三、数组类型</strong></p>
+<hr>
+<p>使用字面量语法创建数组</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// bad</span><br><span class="line">const items = new Array();</span><br><span class="line">// good</span><br><span class="line">const items = [];</span><br></pre></td></tr></table></figure>
+<p>如果你不知道数组的长度，使用 push</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">const someStack = [];</span><br><span class="line">// bad</span><br><span class="line">someStack[someStack.length] = &apos;abracadabra&apos;;</span><br><span class="line">// good</span><br><span class="line">someStack.push(&apos;abracadabra&apos;);</span><br></pre></td></tr></table></figure>
+<p>使用 … 来拷贝数组，不要使用 Array.from、Array.of等数组的新的内置API，Array新api用于适合的场景</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// bad</span><br><span class="line">const len = items.length;</span><br><span class="line">const itemsCopy = [];</span><br><span class="line">let i;</span><br><span class="line">for (i = 0; i &lt; len; i++) &#123;</span><br><span class="line">  itemsCopy[i] = items[i];</span><br><span class="line">&#125;</span><br><span class="line">// good</span><br><span class="line">const itemsCopy = [...items];</span><br><span class="line">// not good</span><br><span class="line">const foo = [1,2,3];</span><br><span class="line">const nodes = Array.from(foo);</span><br></pre></td></tr></table></figure>
+<p><strong>四、解构 Destructuring</strong></p>
+<hr>
+<p>使用对象的多个属性时请建议使用对象的解构赋值，解构赋值避免了为这些属性创建临时变量或对象。即使转化成es5都是一样的</p>
+<p>嵌套结构的对象层数不能超过3层</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">// not good</span><br><span class="line">let obj = &#123;</span><br><span class="line">  &apos;one&apos;: [</span><br><span class="line">    &#123;</span><br><span class="line">      &apos;newTwo&apos;: [</span><br><span class="line">        &#123;</span><br><span class="line">          &apos;three&apos;: [</span><br><span class="line">            &apos;four&apos;: &apos;太多层了，头晕晕&apos;</span><br><span class="line">          ]</span><br><span class="line">        &#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;;</span><br><span class="line">// good</span><br><span class="line">let obj = &#123;</span><br><span class="line">  &apos;one&apos;: [</span><br><span class="line">    &apos;two&apos;,</span><br><span class="line">    &#123;</span><br><span class="line">      &apos;twoObj&apos;: &apos;结构清晰&apos;</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>解构语句中统一不使用圆括号</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> // not good</span><br><span class="line">[(a)] = [11]; // a未定义</span><br><span class="line">let &#123; a: (b) &#125; = &#123;&#125;; // 解析出错</span><br><span class="line">// good</span><br><span class="line">let [a, b] = [11, 22];</span><br></pre></td></tr></table></figure>
+<p>对象解构</p>
+<p>对象解构元素与顺序无关 对象指定默认值时仅对恒等于undefined ( !== null ) 的情况生效</p>
+<p>若函数形参为对象时，使用对象解构赋值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"> // not good</span><br><span class="line">function someFun(opt) &#123;</span><br><span class="line">  let opt1 = opt.opt1;</span><br><span class="line">  let opt2 = opt.opt2;</span><br><span class="line">  console.log(op1);</span><br><span class="line">&#125;</span><br><span class="line">// good</span><br><span class="line">function someFun(opt) &#123;</span><br><span class="line">  let &#123; opt1, opt2 &#125; = opt;</span><br><span class="line">  console.log(`$(opt1) 加上 $(opt2)`);</span><br><span class="line">&#125;</span><br><span class="line">function someFun(&#123; opt1, opt2 &#125;) &#123;</span><br><span class="line">  console.log(opt1);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>若函数有多个返回值时，使用对象解构，不使用数组解构，避免添加顺序的问题</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// not good</span><br><span class="line">function anotherFun() &#123;</span><br><span class="line">  const one = 1, two = 2, three = 3;</span><br><span class="line">  return [one, two, three];</span><br><span class="line">&#125;</span><br><span class="line">const [one, three, two] = anotherFun(); // 顺序乱了</span><br><span class="line">// one = 1, two = 3, three = 2</span><br><span class="line">// good</span><br><span class="line">function anotherFun() &#123;</span><br><span class="line">  const one = 1, two = 2, three = 3;</span><br><span class="line">  return &#123; one, two, three &#125;;</span><br><span class="line">&#125;</span><br><span class="line">const &#123; one, three, two &#125; = anotherFun(); // 不用管顺序</span><br><span class="line">// one = 1, two = 2, three = 3</span><br></pre></td></tr></table></figure>
+<p>已声明的变量不能用于解构赋值（语法错误）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// 语法错误</span><br><span class="line">let a;</span><br><span class="line">&#123; a &#125; = &#123; b: 123&#125;;</span><br></pre></td></tr></table></figure>
+<p>数组解构时数组元素与顺序相关</p>
+<p>例如交换数组两个元素的值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">let x = 1;</span><br><span class="line">let y = 2;</span><br><span class="line">// not good</span><br><span class="line">let temp;</span><br><span class="line">temp = x;</span><br><span class="line">x = y;</span><br><span class="line">y = temp;</span><br><span class="line">// good</span><br><span class="line">[x, y] = [y, x]; // 交换变量</span><br></pre></td></tr></table></figure>
+<p>将数组成员赋值给变量时，使用数组解构</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">const arr = [1, 2, 3, 4, 5];</span><br><span class="line">// not good</span><br><span class="line">const one = arr[0];</span><br><span class="line">const two = arr[1];</span><br><span class="line">// good</span><br><span class="line">const [one, two] = arr;</span><br></pre></td></tr></table></figure>
+<p>函数有多个返回值时使用对象解构，而不是数组解构。</p>
+<p>这样你就可以随时添加新的返回值或任意改变返回值的顺序，而不会导致调用失败。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">function processInput(input) &#123;</span><br><span class="line">    // then a miracle occurs</span><br><span class="line">    return [left, right, top, bottom];</span><br><span class="line">  &#125;</span><br><span class="line">  // the caller needs to think about the order of return data</span><br><span class="line">  const [left, __, top] = processInput(input);</span><br><span class="line">  // good</span><br><span class="line">  function processInput(input) &#123;</span><br><span class="line">    // then a miracle occurs</span><br><span class="line">    return &#123; left, right, top, bottom &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">  // the caller selects only the data they need</span><br><span class="line">  const &#123; left, right &#125; = processInput(input);</span><br></pre></td></tr></table></figure>
+<p><strong>五、函数</strong></p>
+<hr>
+<p>使用函数声明而不是函数表达式</p>
+<p>函数声明拥有函数名，在调用栈中更加容易识别。并且，函数声明会整体提升，而函数表达式只会提升变量本身。这条规则也可以这样描述，始终使用箭头函数来代替函数表达式。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// bad</span><br><span class="line">const foo = function () &#123;</span><br><span class="line">&#125;;</span><br><span class="line">// good</span><br><span class="line">function foo() &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>绝对不要在一个非函数块（if，while，等等）里声明一个函数，把那个函数赋给一个变量。浏览器允许你这么做，但是它们解析不同 注：ECMA-262 把 块 定义为一组语句，函数声明不是一个语句。阅读 ECMA-262 对这个问题的说明</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// bad</span><br><span class="line">if (currentUser) &#123;</span><br><span class="line">  function test() &#123;</span><br><span class="line">    console.log(&apos;Nope.&apos;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">// good</span><br><span class="line">if (currentUser) &#123;</span><br><span class="line">  var test = function test() &#123;</span><br><span class="line">    console.log(&apos;Yup.&apos;);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>绝对不要把参数命名为 arguments, 这将会覆盖函数作用域内传过来的 arguments 对象</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// bad</span><br><span class="line">function nope(name, options, arguments) &#123;</span><br><span class="line">  // ...stuff...</span><br><span class="line">&#125;</span><br><span class="line">// good</span><br><span class="line">function yup(name, options, args) &#123;</span><br><span class="line">  // ...stuff...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>永远不要使用 arguments，使用 … 操作符来代替</p>
+<p>… 操作符可以明确指定你需要哪些参数，并且得到的是一个真实的数组，而不是 arguments 这样的类数组对象。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// bad</span><br><span class="line">function concatenateAll() &#123;</span><br><span class="line">  const args = Array.prototype.slice.call(arguments);</span><br><span class="line">  return args.join(&apos;&apos;);</span><br><span class="line">&#125;</span><br><span class="line">// good</span><br><span class="line">function concatenateAll(...args) &#123;</span><br><span class="line">  return args.join(&apos;&apos;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用函数参数默认值语法，而不是修改函数的实参</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// really bad</span><br><span class="line">function handleThings(opts) &#123;</span><br><span class="line">  opts = opts || &#123;&#125;;</span><br><span class="line">&#125;</span><br><span class="line">// still bad</span><br><span class="line">function handleThings(opts) &#123;</span><br><span class="line">  if (opts === void 0) &#123;</span><br><span class="line">    opts = &#123;&#125;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">// good</span><br><span class="line">function handleThings(opts = &#123;&#125;) &#123;</span><br><span class="line">  // ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>六、箭头函数 Arrow Functions</strong></p>
+<hr>
+<p>当必须使用函数表达式时（例如传递一个匿名函数时），请使用箭头函数</p>
+<p>箭头函数提供了更简洁的语法，并且箭头函数中 this 对象的指向是不变的，this 对象绑定定义时所在的对象，这通常是我们想要的。如果该函数的逻辑非常复杂，请将该函数提取为一个函数声明。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// bad</span><br><span class="line">&quot;use strict&quot;;</span><br><span class="line">var fn = function fn(v) &#123;</span><br><span class="line">  return console.log(v);</span><br><span class="line">&#125;;</span><br><span class="line">// good</span><br><span class="line">var fn= (v=&gt;console.log(v));</span><br></pre></td></tr></table></figure>
+<p>箭头函数总是用括号包裹参数，省略括号只适用于单个参数，并且还降低了程序的可读性</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// bad</span><br><span class="line">[1, 2, 3].forEach(x =&gt; x * x);</span><br><span class="line">// good</span><br><span class="line">[1, 2, 3].forEach((x) =&gt; x * x);</span><br></pre></td></tr></table></figure>
+<p>立即执行的匿名函数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 函数表达式</span><br><span class="line">// immediately-invoked function expression (IIFE)</span><br><span class="line">// good，看起来就很厉害</span><br><span class="line">(() =&gt; &#123;</span><br><span class="line">  console.log(&apos;Welcome to the Internet. Please follow me.&apos;);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+<p><strong>七、对象</strong></p>
+<hr>
+<p>使用对象字面量创建对象</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// bad</span><br><span class="line">var item = new Object();</span><br><span class="line">// good</span><br><span class="line">var item = &#123;&#125;;</span><br></pre></td></tr></table></figure>
+<p>不要使用保留字（reserved words）作为键，否则在 IE8 下将出错</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"> // bad</span><br><span class="line">var superman = &#123;</span><br><span class="line">  class: &apos;superhero&apos;,</span><br><span class="line">  default: &#123; clark: &apos;kent&apos; &#125;,</span><br><span class="line">  private: true</span><br><span class="line">&#125;;</span><br><span class="line">// good</span><br><span class="line">var superman = &#123;</span><br><span class="line">  klass: &apos;superhero&apos;,</span><br><span class="line">  defaults: &#123; clark: &apos;kent&apos; &#125;,</span><br><span class="line">  hidden: true</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>创建对象时使用计算的属性名，而不要在创建对象后使用对象的动态特性，这样可以在同一个位置定义对象的所有属性。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">function getKey(k) &#123;</span><br><span class="line">    return `a key named $&#123;k&#125;`;</span><br><span class="line">  &#125;</span><br><span class="line">  // bad</span><br><span class="line">  const obj = &#123;</span><br><span class="line">    id: 5,</span><br><span class="line">    name: &apos;San Francisco&apos;</span><br><span class="line">  &#125;;</span><br><span class="line">  obj[getKey(&apos;enabled&apos;)] = true;</span><br><span class="line">  // good</span><br><span class="line">  const obj = &#123;</span><br><span class="line">    id: 5,</span><br><span class="line">    name: &apos;San Francisco&apos;,</span><br><span class="line">    [getKey(&apos;enabled&apos;)]: true</span><br><span class="line">  &#125;;</span><br></pre></td></tr></table></figure>
+<p>使用定义对象方法的简短形式<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// bad</span><br><span class="line">const atom = &#123;</span><br><span class="line">  value: 1,</span><br><span class="line">  addValue: function (value) &#123;</span><br><span class="line">    return atom.value + value;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line">// good</span><br><span class="line">const atom = &#123;</span><br><span class="line">  value: 1,</span><br><span class="line">  addValue(value) &#123;</span><br><span class="line">    return atom.value + value;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>使用定义对象属性的简短形式，书写起来更加简单，并且可以自描述。这里和es5有些不同，需要注意下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">const lukeSkywalker = &apos;Luke Skywalker&apos;;</span><br><span class="line">  // bad</span><br><span class="line">  const obj = &#123;</span><br><span class="line">    lukeSkywalker: lukeSkywalker</span><br><span class="line">  &#125;;</span><br><span class="line">  // good</span><br><span class="line">  const obj = &#123;</span><br><span class="line">    lukeSkywalker</span><br><span class="line">  &#125;;</span><br></pre></td></tr></table></figure></p>
+<p>将所有简写的属性写在对象定义的最顶部，这样可以更加方便地知道哪些属性使用了简短形式。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">const anakinSkywalker = &apos;Anakin Skywalker&apos;;</span><br><span class="line">const lukeSkywalker = &apos;Luke Skywalker&apos;;</span><br><span class="line">// bad</span><br><span class="line">const obj = &#123;</span><br><span class="line">  episodeOne: 1,</span><br><span class="line">  twoJedisWalkIntoACantina: 2,</span><br><span class="line">  lukeSkywalker,</span><br><span class="line">  episodeThree: 3,</span><br><span class="line">  mayTheFourth: 4,</span><br><span class="line">  anakinSkywalker</span><br><span class="line">&#125;;</span><br><span class="line">// good</span><br><span class="line">const obj = &#123;</span><br><span class="line">  lukeSkywalker,</span><br><span class="line">  anakinSkywalker,</span><br><span class="line">  episodeOne: 1,</span><br><span class="line">  twoJedisWalkIntoACantina: 2,</span><br><span class="line">  episodeThree: 3,</span><br><span class="line">  mayTheFourth: 4</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p><strong>八、类</strong></p>
+<hr>
+<p>总是使用 class 关键字，避免直接修改 prototype，class 语法更简洁，也更易理解</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">// bad</span><br><span class="line">function Queue(contents = []) &#123;</span><br><span class="line">  this._queue = [...contents];</span><br><span class="line">&#125;</span><br><span class="line">Queue.prototype.pop = function() &#123;</span><br><span class="line">  const value = this._queue[0];</span><br><span class="line">  this._queue.splice(0, 1);</span><br><span class="line">  return value;</span><br><span class="line">&#125;</span><br><span class="line">// good</span><br><span class="line">class Queue &#123;</span><br><span class="line">  constructor(contents = []) &#123;</span><br><span class="line">    this._queue = [...contents];</span><br><span class="line">  &#125;</span><br><span class="line">  pop() &#123;</span><br><span class="line">    const value = this._queue[0];</span><br><span class="line">    this._queue.splice(0, 1);</span><br><span class="line">    return value;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>类名与花括号须保留一个空格间距，类中的方法定义时，括号 ) 也须与花括号 { 保留一个空格间距</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">// not good</span><br><span class="line">class Foo&#123;</span><br><span class="line">  constructor()&#123;</span><br><span class="line">    // constructor</span><br><span class="line">  &#125;</span><br><span class="line">  sayHi()    &#123;</span><br><span class="line">    // 仅保留一个空格间距</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">// good</span><br><span class="line">class Foo &#123;</span><br><span class="line">  constructor() &#123;</span><br><span class="line">    // constructor</span><br><span class="line">  &#125;</span><br><span class="line">  sayHi() &#123;</span><br><span class="line">    // 仅保留一个空格间距</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>定义类时，方法的顺序如下：</p>
+<ul>
+<li>constructor</li>
+<li>public get/set 公用访问器，set只能传一个参数</li>
+<li>public methods 公用方法，公用相关命名使用小驼峰式写法(lowerCamelCase)</li>
+<li>private get/set 私有访问器，私有相关命名应加上下划线 _ 为前缀</li>
+<li>private methods 私有方法</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">// good</span><br><span class="line">class SomeClass &#123;</span><br><span class="line">  constructor() &#123;</span><br><span class="line">    // constructor</span><br><span class="line">  &#125;</span><br><span class="line">  get aval() &#123;</span><br><span class="line">    // public getter</span><br><span class="line">  &#125;</span><br><span class="line">  set aval(val) &#123;</span><br><span class="line">    // public setter</span><br><span class="line">  &#125;</span><br><span class="line">  doSth() &#123;</span><br><span class="line">    // 公用方法</span><br><span class="line">  &#125;</span><br><span class="line">  get _aval() &#123;</span><br><span class="line">    // private getter</span><br><span class="line">  &#125;</span><br><span class="line">  set _aval() &#123;</span><br><span class="line">    // private setter</span><br><span class="line">  &#125;</span><br><span class="line">  _doSth() &#123;</span><br><span class="line">    // 私有方法</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果不是class类，不使用new</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// not good</span><br><span class="line">function Foo() &#123;</span><br><span class="line">&#125;</span><br><span class="line">const foo = new Foo();</span><br><span class="line">// good</span><br><span class="line">class Foo &#123;</span><br><span class="line">&#125;</span><br><span class="line">const foo = new Foo();</span><br></pre></td></tr></table></figure>
+<p>使用 extends 关键字来继承</p>
+<p>这是一个内置的继承方式，并且不会破坏 instanceof 原型检查。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">// bad</span><br><span class="line">  const inherits = require(&apos;inherits&apos;);</span><br><span class="line">  function PeekableQueue(contents) &#123;</span><br><span class="line">    Queue.apply(this, contents);</span><br><span class="line">  &#125;</span><br><span class="line">  inherits(PeekableQueue, Queue);</span><br><span class="line">  PeekableQueue.prototype.peek = function() &#123;</span><br><span class="line">    return this._queue[0];</span><br><span class="line">  &#125;</span><br><span class="line">  // good</span><br><span class="line">  class PeekableQueue extends Queue &#123;</span><br><span class="line">    peek() &#123;</span><br><span class="line">      return this._queue[0];</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p><strong>九、模块</strong></p>
+<hr>
+<p>总是在非标准的模块系统中使用标准的 import 和 export 语法，我们总是可以将标准的模块语法转换成支持特定模块加载器的语法。</p>
+<p>推荐使用import和export来做模块加载</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// bad</span><br><span class="line">const AirbnbStyleGuide = require(&apos;./AirbnbStyleGuide&apos;);</span><br><span class="line">module.exports = AirbnbStyleGuide.es6;</span><br><span class="line">// ok</span><br><span class="line">import AirbnbStyleGuide from &apos;./AirbnbStyleGuide&apos;;</span><br><span class="line">export default AirbnbStyleGuide.es6;</span><br><span class="line">// best</span><br><span class="line">import &#123; es6 &#125; from &apos;./AirbnbStyleGuide&apos;;</span><br><span class="line">export default es6;</span><br></pre></td></tr></table></figure>
+<p>import / export 后面采用花括号{ }引入模块的写法时，建议在花括号内左右各保留一个空格</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// not good</span><br><span class="line">import &#123;lightRed&#125; from &apos;./colors&apos;;</span><br><span class="line">import &#123; lightRed&#125; from &apos;./colors&apos;;</span><br><span class="line">// good</span><br><span class="line">import &#123; lightRed &#125; from &apos;./colors&apos;;</span><br></pre></td></tr></table></figure>
+<p>不要使用通配符 * 的 import，这样确保了一个模块只有一个默认的 export 项</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// bad</span><br><span class="line">import * as AirbnbStyleGuide from &apos;./AirbnbStyleGuide&apos;;</span><br><span class="line">// good</span><br><span class="line">import AirbnbStyleGuide from &apos;./AirbnbStyleGuide&apos;;</span><br></pre></td></tr></table></figure>
+<p>不要直接从一个 import 上 export</p>
+<p>虽然一行代码看起来更简洁，但是有一个明确的 import 和一个明确的 export 使得代码行为更加明确。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// bad</span><br><span class="line">// filename es6.js</span><br><span class="line">export default &#123; es6 &#125; from &apos;./airbnbStyleGuide&apos;;</span><br><span class="line">// good</span><br><span class="line">// filename es6.js</span><br><span class="line">import &#123; es6 &#125; from &apos;./AirbnbStyleGuide&apos;;</span><br><span class="line">export default es6;</span><br></pre></td></tr></table></figure>
+<p>多变量要导出时应采用对象解构形式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// not good</span><br><span class="line">export const a= &apos;a&apos;;</span><br><span class="line">export const b= &apos;b&apos;;</span><br><span class="line">// good</span><br><span class="line">export const a= &apos;a&apos;;</span><br><span class="line">export const b= &apos;b&apos;;</span><br><span class="line">export default &#123; a, b &#125;;</span><br></pre></td></tr></table></figure>
+<p>导出单一一个类时，确保你的文件名就是你的类名<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// file contents</span><br><span class="line">class CheckBox &#123;</span><br><span class="line">  // ...</span><br><span class="line">&#125;</span><br><span class="line">module.exports = CheckBox;</span><br><span class="line">// in some other file</span><br><span class="line">// bad</span><br><span class="line">const CheckBox = require(&apos;./checkBox&apos;);</span><br><span class="line">// bad</span><br><span class="line">const CheckBox = require(&apos;./check_box&apos;);</span><br><span class="line">// good</span><br><span class="line">const CheckBox = require(&apos;./CheckBox&apos;);</span><br></pre></td></tr></table></figure></p>
+<p>导出一个默认小驼峰命名的函数时，文件名应该就是导出的方法名<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function makeStyleGuide() &#123;</span><br><span class="line">&#125;</span><br><span class="line">export default makeStyleGuide;</span><br></pre></td></tr></table></figure></p>
+<p>导出单例、函数库或裸对象时，使用大驼峰命名规则<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">const AirbnbStyleGuide = &#123;</span><br><span class="line">  es6: &#123;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line">export default AirbnbStyleGuide;</span><br></pre></td></tr></table></figure></p>
+<p><strong>十、Iterators 和 Generators</strong></p>
+<hr>
+<p>Iterators。性能比较差，对于数组来说大致与Array.prototype.forEach相当，比不过原生的for循环，而且用起来比较麻烦，数组提供了for…of，对象提供了for…in，不推荐使用迭代器。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">const numbers = [1, 2, 3, 4, 5];</span><br><span class="line">// bad</span><br><span class="line">var iterator = numbers[Symbol.iterator]();  </span><br><span class="line">var result = iterator.next();</span><br><span class="line">let sum = 0;</span><br><span class="line">while (!result.done) &#123;</span><br><span class="line">  sum += result.value;</span><br><span class="line">  result = iterator.next();  </span><br><span class="line">&#125;  </span><br><span class="line">// good</span><br><span class="line">let sum = 0;</span><br><span class="line">for (let num of numbers) &#123;</span><br><span class="line">  sum += num;</span><br><span class="line">&#125;</span><br><span class="line">sum === 15;</span><br><span class="line">// good</span><br><span class="line">let sum = 0;</span><br><span class="line">numbers.forEach((num) =&gt; sum += num);</span><br><span class="line">sum === 15;</span><br><span class="line">// best (use the functional force)</span><br><span class="line">const sum = numbers.reduce((total, num) =&gt; total + num, 0);</span><br><span class="line">sum === 15;</span><br></pre></td></tr></table></figure></p>
+<p>generators。不推荐使用，或者非常谨慎地使用。</p>
+<p>生成器不是用来写异步的，虽然确实有这样一个效果，但这仅仅是一种Hack。异步在未来一定是属于async和await这两个关键字的，但太多人眼里生成器就是写异步用的，这会导致滥用。暂时推荐用promise来实现异步。</p>
+<p><strong>十一、属性访问</strong></p>
+<hr>
+<p>使用点 . 操作符来访问常量属性</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">const luke = &#123;</span><br><span class="line">  jedi: true,</span><br><span class="line">  age: 28</span><br><span class="line">&#125;;</span><br><span class="line">// bad</span><br><span class="line">const isJedi = luke[&apos;jedi&apos;];</span><br><span class="line">// good</span><br><span class="line">const isJedi = luke.jedi;</span><br></pre></td></tr></table></figure>
+<p>使用中括号[] 操作符来访问变量属性<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var luke = &#123;</span><br><span class="line">  jedi: true,</span><br><span class="line">  age: 28</span><br><span class="line">&#125;;</span><br><span class="line">function getProp(prop) &#123;</span><br><span class="line">  return luke[prop];</span><br><span class="line">&#125;</span><br><span class="line">var isJedi = getProp(&apos;jedi&apos;);</span><br></pre></td></tr></table></figure></p>
+<p><strong>十二、map + set + weakmap + weakset 数据结构</strong></p>
+<hr>
+<p>新加的集合类型，提供了更加方便的获取属性值的方法，可以检查某个属性是属于原型链上还是当前对象的，并用获取对象的set和get方法</p>
+<p>但是，推荐使用weakmap和weakset，而不是map和set，除非必须使用。普通集合会阻止垃圾回收器对这些作为属性键存在的对象的回收，有造成内存泄漏的危险<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">// not good, Maps</span><br><span class="line">var wm = new Map();</span><br><span class="line">wm.set(key, &#123; extra: 42 &#125;);</span><br><span class="line">wm.size === 1</span><br><span class="line">// not good, Sets</span><br><span class="line">var ws = new Set();</span><br><span class="line">ws.add(&#123; data: 42 &#125;);</span><br><span class="line">// good, Weak Maps</span><br><span class="line">var wm = new WeakMap();</span><br><span class="line">wm.set(key, &#123; extra: 42 &#125;);</span><br><span class="line">wm.size === undefined</span><br><span class="line">// good, Weak Sets</span><br><span class="line">var ws = new WeakSet();</span><br><span class="line">ws.add(&#123; data: 42 &#125;);//因为添加到ws的这个临时对象没有其他变量引用它，所以ws不会保存它的值，也就是说这次添加其实没有意思</span><br><span class="line">// not good</span><br><span class="line">let object = &#123;&#125;,</span><br><span class="line">object.hasOwnProperty(key)</span><br><span class="line">// good</span><br><span class="line">let object = new WeakSet();</span><br><span class="line">object.has(key) === true;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li><p>当你的元素或者键值有可能不是字符串时，推荐使用WeakMap和WeakSet。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// bad</span><br><span class="line">var obj = &#123; 3:&apos;value&apos; &#125;;</span><br><span class="line">// good</span><br><span class="line">var ws = new WeakSet();</span><br><span class="line">ws.add(3, &apos;value&apos;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>有移除操作的需求时，使用WeakMap和WeakSet。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// bad</span><br><span class="line">var obj = &#123; &apos;key&apos;:&apos;value&apos; &#125;;</span><br><span class="line">delete obj.key;</span><br><span class="line">// good</span><br><span class="line">var ws = new WeakSet();</span><br><span class="line">ws.add(&apos;key&apos;, &apos;value&apos;);</span><br><span class="line">ws.remove(&apos;key&apos;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>当仅需要一个不可重复的集合时，使用WeakSet优先于普通对象，而不要使用{foo: true}这样的对象。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// bad</span><br><span class="line">var obj = &#123; &apos;key&apos;:&apos;value&apos; &#125;;</span><br><span class="line">// good</span><br><span class="line">var ws = new WeakSet();</span><br><span class="line">ws.add(&apos;key&apos;, &apos;value&apos;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>当需要遍历功能时，使用WeakMap和WeakSet，因为其可以简单地使用for..of进行遍历，性能更高</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// bad</span><br><span class="line">var obj = &#123; key:&apos;value&apos;, key1: &apos;value1&apos; &#125;;</span><br><span class="line">for(var key in obj)&#123;</span><br><span class="line">&#125;</span><br><span class="line">// good</span><br><span class="line">var ws = new WeakSet();</span><br><span class="line">ws.add(&apos;key&apos;, &apos;value&apos;).add(&apos;key1&apos;, &apos;value1&apos;);</span><br><span class="line">for(var key of ws)&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>十三、promise、symbols、proxies</strong></p>
+<hr>
+<p>promise是一种异步处理模式。发promise申明和调用分开，推荐异步方式使用Promise。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// not good</span><br><span class="line">(new Promise(resolve, reject)&#123;&#125;)</span><br><span class="line">  .then(cunction()&#123;&#125;,function()&#123;&#125;)</span><br><span class="line">  .then();</span><br><span class="line">// good</span><br><span class="line">var promise = new Primise(function(resolve, reject)&#123;&#125;);</span><br><span class="line">promise</span><br><span class="line">  .then(function()&#123;&#125;,function()&#123;]&#125;)</span><br><span class="line">  .then();</span><br></pre></td></tr></table></figure></p>
+<p>symbol用于对象的键和私有属性，使用过于复杂，没有使用必要，容易扰乱外层作用域。总之不要使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// good</span><br><span class="line">function MyClass(privateData) &#123;</span><br><span class="line">  let key = privateData;</span><br><span class="line">&#125;</span><br><span class="line">//not good</span><br><span class="line">const key = Symbol(&apos;key&apos;);</span><br><span class="line">function MyClass(privateData) &#123;</span><br><span class="line">  this[key] = privateData;</span><br><span class="line">&#125;</span><br><span class="line">const object = new MyClass(&quot;hello&quot;)</span><br><span class="line">object[&apos;key&apos;] === undefined //无法访问该属性，因为是私有的</span><br></pre></td></tr></table></figure>
+<p>Proxy可以监听对象身上发生了什么事情，并在这些事情发生后执行一些相应的操作，没有特别要注意的，尽情用吧。</p>
+<p><strong>十四、不要使用统一码</strong></p>
+<hr>
+<p>字符串支持新的Unicode文本形式，也增加了新的正则表达式修饰符u来处理码位，但是一般不要这样处理，会减低程序可读性且处理统一码速度会降低<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// not good</span><br><span class="line">&apos;字符串&apos;.length == 6</span><br><span class="line">// 新加的：正则支持统一码&apos;u&apos;， 但仍建议不使用</span><br><span class="line">// not good</span><br><span class="line">&apos;字符串&apos;.match(/./u)[0].length == 6</span><br><span class="line">&apos;字符串&apos;.codePointAt(0) == 0x20BB7</span><br></pre></td></tr></table></figure></p>
+<p><strong>十五、进制数支持</strong></p>
+<hr>
+<p>加入对二进制(b)和八进制(o)字面量的支持。该特性可以使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// ok</span><br><span class="line">0b111110111 === 503 // true</span><br><span class="line">0o767 === 503 // true</span><br></pre></td></tr></table></figure>
+<p><strong>十六、不建议使用reflect对象和tail calls尾调用</strong></p>
+<hr>
+<p>没有使用的必要性</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/17/CSS、SASS/" rel="next" title="CSS、SASS">
+                <i class="fa fa-chevron-left"></i> CSS、SASS
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">bob</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ES6篇"><span class="nav-number">1.</span> <span class="nav-text">++ES6篇++</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">bob</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
